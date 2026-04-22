@@ -1,7 +1,5 @@
 # Unity HDRP Product Visualizer
 
-@mainpage Unity HDRP Product Visualizer
-
 An interactive 3D product showcase built with **Unity 6** and the **High Definition Render Pipeline (HDRP)**.
 Designed as a professional virtual catalogue experience for high-end consumer products.
 
