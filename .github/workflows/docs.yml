@@ -23,19 +23,40 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # ── Verify source files are reachable before running Doxygen ──────────
+      - name: List source files
+        run: |
+          echo "=== Scripts ==="
+          find UnityVisualizer/Assets/ProductVisualizer/Scripts -name "*.cs" 2>/dev/null \
+            && echo "--- $(find UnityVisualizer/Assets/ProductVisualizer/Scripts -name '*.cs' | wc -l) .cs files found" \
+            || echo "WARNING: Scripts folder not found"
+
+          echo "=== Editor ==="
+          find UnityVisualizer/Assets/ProductVisualizer/Editor -name "*.cs" 2>/dev/null \
+            && echo "--- $(find UnityVisualizer/Assets/ProductVisualizer/Editor -name '*.cs' | wc -l) .cs files found" \
+            || echo "WARNING: Editor folder not found"
+
       - name: Install Doxygen and Graphviz
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends doxygen graphviz
 
       - name: Generate Doxygen HTML
-        run: doxygen Doxyfile
+        run: doxygen Doxyfile 2>&1 | tee doxygen.log
 
-      - name: Verify output
+      # ── Show what was actually generated ──────────────────────────────────
+      - name: Summarise output
         run: |
-          test -f docs/html/index.html || { echo "ERROR: index.html not found"; exit 1; }
-          echo "OK — $(find docs/html -name '*.html' | wc -l) HTML files generated"
+          echo "=== Generated files ==="
+          echo "Total HTML : $(find docs/html -name '*.html' 2>/dev/null | wc -l)"
+          echo "Class pages: $(find docs/html -name 'class_*.html' 2>/dev/null | wc -l)"
+          echo "File pages : $(find docs/html -name '*_8cs.html'  2>/dev/null | wc -l)"
+          echo ""
+          echo "=== Doxygen warnings/errors ==="
+          grep -i "warning\|error" doxygen.log || echo "(none)"
 
-      # Push docs/html directly to the gh-pages branch using plain git.
-      # No third-party actions — no Node.js version warnings.
+      - name: Check index exists
+        run: test -f docs/html/index.html || { cat doxygen.log; exit 1; }
+
+      # ── Deploy to gh-pages using plain git ────────────────────────────────
       - name: Deploy to gh-pages
         run: |
           cd docs/html

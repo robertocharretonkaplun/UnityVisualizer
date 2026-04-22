@@ -15,22 +15,20 @@ PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = docs
 
 # ---------------------------------------------------------------------------
-# Input
+# Input  —  all paths relative to repo root (where doxygen is invoked)
 # ---------------------------------------------------------------------------
-INPUT                  = UnityVisualizer/Assets/ProductVisualizer \
+INPUT                  = UnityVisualizer/Assets/ProductVisualizer/Scripts \
+                         UnityVisualizer/Assets/ProductVisualizer/Editor \
+                         UnityVisualizer/Assets/ProductVisualizer/Shaders \
                          README.md
-FILE_PATTERNS          = *.cs *.md
-RECURSIVE              = YES
+
+FILE_PATTERNS          = *.cs *.shader *.md
+
+RECURSIVE              = NO
+
 EXCLUDE_PATTERNS       = */Generated/* \
-                         */obj/* \
-                         */Library/* \
                          *.meta
 
-# Parse the Shaders folder for the HLSL background shader documentation
-INPUT                 += UnityVisualizer/Assets/ProductVisualizer/Shaders
-FILE_PATTERNS         += *.shader
-
-# Use README.md as the main page
 USE_MDFILE_AS_MAINPAGE = README.md
 
 # ---------------------------------------------------------------------------
@@ -40,26 +38,21 @@ EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO
 EXTRACT_STATIC         = YES
 EXTRACT_LOCAL_CLASSES  = YES
-
-HIDE_UNDOC_RELATIONS   = NO
 INLINE_INHERITED_MEMB  = YES
 INHERIT_DOCS           = YES
 
 # ---------------------------------------------------------------------------
-# Source code browsing
+# Source browsing
 # ---------------------------------------------------------------------------
 SOURCE_BROWSER         = YES
-INLINE_SOURCES         = NO
-STRIP_CODE_COMMENTS    = NO
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
 
 # ---------------------------------------------------------------------------
-# Optimisation for C# / Java-style code
+# C# / Java-style optimisation
 # ---------------------------------------------------------------------------
 OPTIMIZE_OUTPUT_JAVA   = YES
 JAVADOC_AUTOBRIEF      = YES
-QT_AUTOBRIEF           = NO
 
 # ---------------------------------------------------------------------------
 # HTML output
@@ -68,7 +61,6 @@ GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
 
-# Modern built-in theme
 HTML_COLORSTYLE        = LIGHT
 HTML_COLORSTYLE_HUE    = 220
 HTML_COLORSTYLE_SAT    = 80
@@ -78,23 +70,23 @@ GENERATE_TREEVIEW      = YES
 TREEVIEW_WIDTH         = 260
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = NO
+SEARCHENGINE           = YES
 
-# Collapse namespaces in the sidebar by default
 ENUM_VALUES_PER_LINE   = 1
 
 # ---------------------------------------------------------------------------
-# Diagrams (requires Graphviz dot; disable if not installed on CI)
+# Diagrams — use PNG to avoid SVG rendering issues on Pages
 # ---------------------------------------------------------------------------
 HAVE_DOT               = YES
-DOT_NUM_THREADS        = 0
+DOT_NUM_THREADS        = 2
 CLASS_GRAPH            = YES
 COLLABORATION_GRAPH    = YES
 INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
 CALL_GRAPH             = NO
 CALLER_GRAPH           = NO
-DOT_IMAGE_FORMAT       = svg
-INTERACTIVE_SVG        = YES
+DOT_IMAGE_FORMAT       = png
+INTERACTIVE_SVG        = NO
 DOT_TRANSPARENT        = YES
 
 # ---------------------------------------------------------------------------
@@ -113,4 +105,3 @@ QUIET                  = NO
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = NO
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO
