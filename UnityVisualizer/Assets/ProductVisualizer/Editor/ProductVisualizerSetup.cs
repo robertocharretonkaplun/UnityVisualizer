@@ -1,4 +1,9 @@
 #if UNITY_EDITOR
+/// @file ProductVisualizerSetup.cs
+/// @brief Editor-only one-click scene builder for the HDRP Product Visualizer.
+/// @author Roberto Charreton
+/// @date 2026
+
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -8,15 +13,39 @@ using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// One-click setup: Tools > Product Visualizer > Setup Scene
-/// </summary>
+/// @class ProductVisualizerSetup
+/// @brief Static editor utility that builds the entire product visualizer scene in one click.
+///
+/// Accessible from the Unity menu at <b>Tools → Product Visualizer → Setup Scene</b>.
+///
+/// The method SetupScene() orchestrates the following sub-systems in order:
+/// 1. Post-process Volume (ACES tonemapping, Bloom, SSAO, Vignette).
+/// 2. 3-point studio lights (Key, Fill, Rim, Bounce) as HDRP Rectangle Area Lights.
+/// 3. Backdrop and ground quads with material assets saved to @ref ASSET_DIR.
+/// 4. Pedestal composed of two 64-sided procedural cylinders (smooth shadows).
+/// 5. Product: the FBX soda can prefab with CanMaterialSwapper populated from textures.
+/// 6. Main Camera rigged with OrbitCamera + HDRP physical camera settings.
+/// 7. BackgroundController wired to the backdrop and ground renderers.
+/// 8. Screen-space UI Canvas with all buttons and labels wired to VisualizerUI.
+///
+/// All generated Material, Mesh, and VolumeProfile assets are saved under
+/// <c>Assets/ProductVisualizer/Generated/</c> and can be modified freely after setup.
+///
+/// @note This class is compiled only inside the Unity Editor (@c \#if UNITY_EDITOR).
+///       It has no runtime footprint.
 public static class ProductVisualizerSetup
 {
+    /// @brief Output folder for all generated asset files (.mat, .asset, .mesh).
     const string ASSET_DIR = "Assets/ProductVisualizer/Generated";
+
+    /// @brief Name of the root GameObject placed in the scene hierarchy.
     const string ROOT_NAME = "=== PRODUCT VISUALIZER ===";
 
     // -------------------------------------------------------------------------
+    /// @brief Entry point. Clears any previous setup and rebuilds the full scene.
+    /// @details Registered as a Unity menu item at
+    ///          <b>Tools → Product Visualizer → Setup Scene</b>.
+    ///          Safe to run multiple times — stale objects are destroyed first.
     [MenuItem("Tools/Product Visualizer/Setup Scene", priority = 0)]
     public static void SetupScene()
     {
@@ -50,6 +79,7 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // DIRECTORY HELPERS
     // -------------------------------------------------------------------------
+    /// @brief Creates the @ref ASSET_DIR folder hierarchy if it does not exist.
     static void EnsureDirectories()
     {
         string[] parts = ASSET_DIR.Split('/');
@@ -63,6 +93,10 @@ public static class ProductVisualizerSetup
         }
     }
 
+    /// @brief Persists a UnityEngine.Object as an asset file and returns its path.
+    /// @param asset The object to save (Material, Mesh, VolumeProfile, …).
+    /// @param name  Filename including extension (e.g. "CanBodyMat.mat").
+    /// @returns The full project-relative path to the saved asset.
     static string SaveAsset(Object asset, string name)
     {
         string path = $"{ASSET_DIR}/{name}";
@@ -74,6 +108,10 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // POST-PROCESSING
     // -------------------------------------------------------------------------
+    /// @brief Creates a global HDRP Volume with a saved VolumeProfile.
+    /// @details Overrides: ACES Tonemapping, Bloom (threshold 0.85), SSAO,
+    ///          ColorAdjustments (contrast +12, saturation +8), Vignette.
+    /// @param root Parent GameObject in the scene hierarchy.
     static void SetupPostProcess(GameObject root)
     {
         var go = new GameObject("PostProcess Volume");
@@ -113,6 +151,15 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // LIGHTS  (3-point studio setup)
     // -------------------------------------------------------------------------
+    /// @brief Creates four HDRP Rectangle Area Lights under a "Lights" parent.
+    /// @details
+    /// | Name         | Role            | Colour      | Intensity |
+    /// |--------------|-----------------|-------------|-----------|
+    /// | Key Light    | Main exposure   | Warm white  | 3500 lm   |
+    /// | Fill Light   | Shadow fill     | Cool blue   | 1200 lm   |
+    /// | Rim Light    | Back highlight  | Neutral     | 2200 lm   |
+    /// | Bounce Light | Floor bounce    | Soft blue   | 350 lm    |
+    /// @param root Parent GameObject in the scene hierarchy.
     static void SetupLights(GameObject root)
     {
         var lightRoot = new GameObject("Lights");
@@ -151,6 +198,14 @@ public static class ProductVisualizerSetup
             size:      new Vector2(3f, 3f));
     }
 
+    /// @brief Instantiates a single HDRP Rectangle Area Light.
+    /// @param parent    Parent GameObject for the new light.
+    /// @param name      Display name of the new GameObject.
+    /// @param pos       Local position relative to @p parent.
+    /// @param rot       Local rotation.
+    /// @param color     Linear light colour.
+    /// @param intensity Luminous flux in Lumens.
+    /// @param size      Width × Height of the rectangle in metres.
     static void MakeAreaLight(GameObject parent, string name,
         Vector3 pos, Quaternion rot, Color color, float intensity, Vector2 size)
     {
@@ -178,6 +233,12 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // ENVIRONMENT  (backdrop + ground)
     // -------------------------------------------------------------------------
+    /// @brief Creates the backdrop quad and reflective ground plane with saved materials.
+    /// @details The backdrop uses the Custom/GradientBackground shader (falls back to
+    ///          HDRP/Unlit if the shader is not compiled yet). The ground uses HDRP/Lit
+    ///          with high smoothness to produce a subtle reflective floor.
+    /// @param root Parent GameObject in the scene hierarchy.
+    /// @returns Tuple of (backdropRenderer, groundRenderer) for wiring to BackgroundController.
     static (Renderer backdrop, Renderer ground) SetupEnvironment(GameObject root)
     {
         var envRoot = new GameObject("Environment");
@@ -253,10 +314,15 @@ public static class ProductVisualizerSetup
             pos: new Vector3(0f, 0.31f, 0f), scale: new Vector3(1.32f, 0.02f, 1.32f), mat: savedMat);
     }
 
-    /// <summary>
-    /// Creates a GameObject with a high-polygon-count (64 sides) cylinder mesh so
-    /// shadow edges don't show the staircase artefact of Unity's default 24-sided cylinder.
-    /// </summary>
+    /// @brief Creates a GameObject with a 64-sided cylinder mesh to eliminate shadow staircasing.
+    /// @details Unity's built-in cylinder has only 24 sides, which causes jagged shadow
+    ///          edges on rounded objects. 64 sides is visually indistinguishable from a
+    ///          true circle while keeping the mesh lightweight.
+    /// @param parent Parent Transform.
+    /// @param name   GameObject display name; also used as the mesh asset filename.
+    /// @param pos    Local position.
+    /// @param scale  Local scale.
+    /// @param mat    Shared material to assign.
     static void PlaceSmoothCylinder(Transform parent, string name, Vector3 pos, Vector3 scale, Material mat)
     {
         const int sides = 64;
@@ -277,10 +343,14 @@ public static class ProductVisualizerSetup
             AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
     }
 
-    /// <summary>
-    /// Procedurally builds a unit cylinder mesh with the given number of sides.
-    /// Unity's built-in cylinder uses ~24 sides; 64 makes shadows smooth.
-    /// </summary>
+    /// @brief Procedurally builds a capped cylinder mesh with the specified number of sides.
+    /// @details Vertex layout:
+    ///          - Rings [0 … sides]: bottom ring at Y = -1
+    ///          - Rings [sides+1 … 2*sides+1]: top ring at Y = +1
+    ///          - Index @c vertsPerRing*2: bottom cap centre
+    ///          - Index @c vertsPerRing*2+1: top cap centre
+    /// @param sides Number of circumferential vertices. Use 64 for smooth shadows.
+    /// @returns A new Mesh object (not yet saved as an asset).
     static Mesh BuildCylinderMesh(int sides)
     {
         var mesh = new Mesh();
@@ -348,6 +418,13 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // PRODUCT  (real FBX can from Resources/Prefabs/Can)
     // -------------------------------------------------------------------------
+    /// @brief Instantiates the soda can prefab and wires a CanMaterialSwapper with brand materials.
+    /// @details Loads <c>Assets/Resources/Prefabs/Can.prefab</c> (2-slot FBX mesh).
+    ///          For each brand texture in <c>Assets/Resources/textures/</c> it creates an
+    ///          HDRP/Lit material with @c _BaseColorMap assigned and saves it to @ref ASSET_DIR.
+    ///          Falls back to a primitive cylinder if the prefab is missing.
+    /// @param root Parent GameObject in the scene hierarchy.
+    /// @returns Tuple of (productRoot, CanMaterialSwapper) for wiring to VisualizerUI.
     static (GameObject productRoot, CanMaterialSwapper swapper) SetupProduct(GameObject root)
     {
         var productRoot = new GameObject("Product");
@@ -428,6 +505,11 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // CAMERA
     // -------------------------------------------------------------------------
+    /// @brief Configures the Main Camera with OrbitCamera, physical properties, and a Reflection Probe.
+    /// @details Reuses an existing Camera.main if present; otherwise creates a new one.
+    ///          Also creates a separate "Camera Target" GameObject at the product's centre.
+    /// @param root Parent GameObject in the scene hierarchy.
+    /// @returns Tuple of (cameraGameObject, OrbitCamera component).
     static (GameObject camGO, OrbitCamera orbit) SetupCamera(GameObject root)
     {
         // Target
@@ -481,6 +563,11 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // BACKGROUND CONTROLLER
     // -------------------------------------------------------------------------
+    /// @brief Creates the BackgroundController component and populates the four default presets.
+    /// @param root     Parent GameObject in the scene hierarchy.
+    /// @param backdrop Renderer of the backdrop quad to control.
+    /// @param ground   Renderer of the ground quad to control.
+    /// @returns The configured BackgroundController instance.
     static BackgroundController SetupBackgroundController(
         GameObject root, Renderer backdrop, Renderer ground)
     {
@@ -516,6 +603,13 @@ public static class ProductVisualizerSetup
     // -------------------------------------------------------------------------
     // UI
     // -------------------------------------------------------------------------
+    /// @brief Builds the ScreenSpaceOverlay Canvas with the control bar, info panel, and VisualizerUI.
+    /// @details Creates an EventSystem if one does not already exist in the scene.
+    ///          All button and label references are injected into VisualizerUI automatically.
+    /// @param root    Parent GameObject in the scene hierarchy.
+    /// @param orbit   OrbitCamera to wire to autoRotateButton and resetCameraButton.
+    /// @param swapper CanMaterialSwapper to wire to the brand-cycling buttons.
+    /// @param bgCtrl  BackgroundController to wire to nextBgButton.
     static void SetupUI(GameObject root,
         OrbitCamera orbit, CanMaterialSwapper swapper, BackgroundController bgCtrl)
     {
@@ -583,6 +677,7 @@ public static class ProductVisualizerSetup
     }
 
     // ---- UI Helpers ---
+    /// @brief Creates a RectTransform panel with the given anchor/pivot/size.
     static GameObject MakePanel(Transform parent, string name,
         Vector2 anchorMin, Vector2 anchorMax, Vector2 pivot, Vector2 size, Vector2 pos)
     {
@@ -597,6 +692,7 @@ public static class ProductVisualizerSetup
         return go;
     }
 
+    /// @brief Creates a styled UI Button with a TextMeshProUGUI child label.
     static Button MakeButton(Transform parent, string label, Vector2 pos, Vector2 size)
     {
         var go = new GameObject($"Btn_{label}");
