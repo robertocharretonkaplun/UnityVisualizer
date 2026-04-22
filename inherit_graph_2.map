@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,129,129,155"/>
+<area shape="rect" id="Node000001" href="$classBackgroundController.html" title="Cycles through BackgroundPreset entries by writing to MaterialPropertyBlocks." alt="" coords="187,5,349,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="86,117,125,77,149,57,176,40,203,28,205,33,179,44,152,61,128,81,90,121"/>
+<area shape="rect" id="Node000002" href="$classCanMaterialSwapper.html" title="Cycles through brand variants by replacing the full material array on the can renderer." alt="" coords="189,55,347,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="104,121,176,89,212,78,214,83,178,94,106,126"/>
+<area shape="rect" id="Node000003" href="$classOrbitCamera.html" title="Spherical&#45;coordinate camera that orbits around a target Transform." alt="" coords="215,104,321,129"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="143,130,215,121,215,126,143,135"/>
+<area shape="rect" id="Node000004" href="$classProductFloatAnimation.html" title="Animates a GameObject with a gentle sinusoidal float and dual&#45;axis tilt." alt="" coords="183,153,353,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="144,148,183,153,182,158,143,154"/>
+<area shape="rect" id="Node000005" href="$classProductVariantController.html" title="Applies ProductVariant presets to a set of Renderers using MaterialPropertyBlock." alt="" coords="177,203,359,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="108,158,178,187,218,200,216,205,176,193,106,163"/>
+<area shape="rect" id="Node000006" href="$classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers." alt="" coords="218,252,318,277"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="91,163,129,201,179,237,219,253,217,258,176,242,126,205,87,167"/>
+</map>
