@@ -1,7 +1,7 @@
 # =============================================================================
 #  Doxyfile — Unity HDRP Product Visualizer
 #  Run:  doxygen Doxyfile
-#  Output: docs/html/index.html  (served via GitHub Pages)
+#  Output: docs/index.html  (served via GitHub Pages — branch: main /docs)
 # =============================================================================
 
 # ---------------------------------------------------------------------------
@@ -12,7 +12,7 @@ PROJECT_BRIEF          = "Interactive 3D product showcase built with Unity 6 and
 PROJECT_NUMBER         = "1.0.0"
 PROJECT_LOGO           =
 
-OUTPUT_DIRECTORY       = docs
+OUTPUT_DIRECTORY       = .
 
 # ---------------------------------------------------------------------------
 # Input  —  all paths relative to repo root (where doxygen is invoked)
@@ -58,7 +58,7 @@ JAVADOC_AUTOBRIEF      = YES
 # HTML output
 # ---------------------------------------------------------------------------
 GENERATE_HTML          = YES
-HTML_OUTPUT            = html
+HTML_OUTPUT            = docs
 HTML_FILE_EXTENSION    = .html
 
 HTML_COLORSTYLE        = LIGHT
