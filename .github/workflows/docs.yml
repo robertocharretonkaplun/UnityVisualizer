@@ -10,62 +10,54 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages:    write
+  id-token: write
 
 concurrency:
-  group: gh-pages
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  # ── 1. Build ──────────────────────────────────────────────────────────────
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      # ── Verify source files are reachable before running Doxygen ──────────
-      - name: List source files
+      - name: Verify source files
         run: |
-          echo "=== Scripts ==="
-          find UnityVisualizer/Assets/ProductVisualizer/Scripts -name "*.cs" 2>/dev/null \
-            && echo "--- $(find UnityVisualizer/Assets/ProductVisualizer/Scripts -name '*.cs' | wc -l) .cs files found" \
-            || echo "WARNING: Scripts folder not found"
+          count=$(find UnityVisualizer/Assets/ProductVisualizer/Scripts \
+                       UnityVisualizer/Assets/ProductVisualizer/Editor \
+                  -name "*.cs" 2>/dev/null | wc -l)
+          echo "Found $count .cs files"
+          [ "$count" -gt 0 ] || { echo "ERROR: no .cs files found"; exit 1; }
 
-          echo "=== Editor ==="
-          find UnityVisualizer/Assets/ProductVisualizer/Editor -name "*.cs" 2>/dev/null \
-            && echo "--- $(find UnityVisualizer/Assets/ProductVisualizer/Editor -name '*.cs' | wc -l) .cs files found" \
-            || echo "WARNING: Editor folder not found"
-
-      - name: Install Doxygen and Graphviz
+      - name: Install Doxygen + Graphviz
         run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends doxygen graphviz
 
-      - name: Generate Doxygen HTML
-        run: doxygen Doxyfile 2>&1 | tee doxygen.log
+      - name: Run Doxygen
+        run: doxygen Doxyfile
 
-      # ── Show what was actually generated ──────────────────────────────────
-      - name: Summarise output
+      - name: Verify output
         run: |
-          echo "=== Generated files ==="
-          echo "Total HTML : $(find docs/html -name '*.html' 2>/dev/null | wc -l)"
-          echo "Class pages: $(find docs/html -name 'class_*.html' 2>/dev/null | wc -l)"
-          echo "File pages : $(find docs/html -name '*_8cs.html'  2>/dev/null | wc -l)"
-          echo ""
-          echo "=== Doxygen warnings/errors ==="
-          grep -i "warning\|error" doxygen.log || echo "(none)"
+          echo "HTML files : $(find docs/html -name '*.html' | wc -l)"
+          echo "Class pages: $(find docs/html -name 'class_*.html' | wc -l)"
+          test -f docs/html/index.html || { echo "ERROR: index.html missing"; exit 1; }
 
-      - name: Check index exists
-        run: test -f docs/html/index.html || { cat doxygen.log; exit 1; }
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/html
 
-      # ── Deploy to gh-pages using plain git ────────────────────────────────
-      - name: Deploy to gh-pages
-        run: |
-          cd docs/html
-          git init -b gh-pages
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          touch .nojekyll
-          git add .
-          git commit -m "docs: regenerate Doxygen [skip ci]"
-          git push -f \
-            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" \
-            gh-pages
+  # ── 2. Deploy ─────────────────────────────────────────────────────────────
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
