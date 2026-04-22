@@ -7,10 +7,10 @@ on:
       - 'UnityVisualizer/Assets/ProductVisualizer/**'
       - 'Doxyfile'
       - 'README.md'
-  workflow_dispatch:   # allow manual trigger from the Actions tab
+  workflow_dispatch:
 
 permissions:
-  contents: write      # needed to push to gh-pages branch
+  contents: write
 
 concurrency:
   group: gh-pages
@@ -18,28 +18,30 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    name: Build Doxygen & Deploy to gh-pages
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Install Doxygen and Graphviz
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends doxygen graphviz
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends doxygen graphviz
 
       - name: Generate Doxygen HTML
         run: doxygen Doxyfile
 
-      # peaceiris/actions-gh-pages pushes the output to the gh-pages branch
-      # and adds .nojekyll automatically (enable_jekyll: false).
-      # In Settings → Pages, set source: "Deploy from branch gh-pages / (root)".
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Verify output exists
+        run: |
+          echo "=== docs/html contents ==="
+          ls -la docs/html/ || { echo "ERROR: docs/html not found"; exit 1; }
+          echo "=== index.html check ==="
+          test -f docs/html/index.html || { echo "ERROR: index.html missing"; exit 1; }
+          echo "OK: index.html found"
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/html
           enable_jekyll: false
+          force_orphan: true
           commit_message: "docs: regenerate Doxygen [skip ci]"
