@@ -29,19 +29,22 @@ jobs:
       - name: Generate Doxygen HTML
         run: doxygen Doxyfile
 
-      - name: Verify output exists
+      - name: Verify output
         run: |
-          echo "=== docs/html contents ==="
-          ls -la docs/html/ || { echo "ERROR: docs/html not found"; exit 1; }
-          echo "=== index.html check ==="
-          test -f docs/html/index.html || { echo "ERROR: index.html missing"; exit 1; }
-          echo "OK: index.html found"
+          test -f docs/html/index.html || { echo "ERROR: index.html not found"; exit 1; }
+          echo "OK — $(find docs/html -name '*.html' | wc -l) HTML files generated"
 
+      # Push docs/html directly to the gh-pages branch using plain git.
+      # No third-party actions — no Node.js version warnings.
       - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/html
-          enable_jekyll: false
-          force_orphan: true
-          commit_message: "docs: regenerate Doxygen [skip ci]"
+        run: |
+          cd docs/html
+          git init -b gh-pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          touch .nojekyll
+          git add .
+          git commit -m "docs: regenerate Doxygen [skip ci]"
+          git push -f \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" \
+            gh-pages
