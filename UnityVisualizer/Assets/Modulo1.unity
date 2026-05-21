@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 646007818}
   - component: {fileID: 646007817}
   - component: {fileID: 646007820}
+  - component: {fileID: 646007821}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -772,6 +773,28 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &646007821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646007816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd6d77260716df43a59277064ea2b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitCamera
+  target: {fileID: 817992672}
+  distance: 3
+  autoRotateSpeed: 20
+  autoRotate: 1
+  mouseSensitivity: 200
+  minVerticalAngle: -20
+  maxVerticalAngle: 70
+  scrollSensitivity: 5
+  minDistance: 1.5
+  maxDistance: 8
 --- !u!1 &723923568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,6 +1273,37 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &817992671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817992672}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &817992672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817992671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.83, z: 0.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850969378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,11 +1670,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.20000008
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25
+      value: 0.25000006
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1644,11 +1698,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1503492705873838160, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1662,6 +1716,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2657472290279779067, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657472290279779067, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aa5274599953053418be1bf93934b78e, type: 2}
+    - target: {fileID: 2657472290279779067, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d5dd2fe9b01921a4db6bdf2621473751, type: 2}
     - target: {fileID: 5111545100436765704, guid: 1d4c51a223ba1034d97507579d03b9b7, type: 3}
       propertyPath: m_Name
       value: Can
@@ -2076,6 +2142,7 @@ GameObject:
   - component: {fileID: 1581461930}
   - component: {fileID: 1581461929}
   - component: {fileID: 1581461928}
+  - component: {fileID: 1581461931}
   m_Layer: 0
   m_Name: Product
   m_TagString: Untagged
@@ -2090,7 +2157,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581461927}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4754b505e32106348b997db2788cc0b8, type: 3}
   m_Name: 
@@ -2141,6 +2208,32 @@ Transform:
   - {fileID: 1242865867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1581461931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581461927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c814c74614092449b1c963de9e673a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CanMaterialSwapper2
+  canRenderer: {fileID: 1242865865}
+  variants:
+  - variantName: Can_MtnDew
+    lableMaterial: {fileID: 2100000, guid: 249a8edf01f0ad44ea81b49b3aec7bd6, type: 2}
+    capMaterial: {fileID: 2100000, guid: d5dd2fe9b01921a4db6bdf2621473751, type: 2}
+  - variantName: Can_Sprite
+    lableMaterial: {fileID: 2100000, guid: 16479c7903ba87d4bb0f96be6cc872c6, type: 2}
+    capMaterial: {fileID: 2100000, guid: d5dd2fe9b01921a4db6bdf2621473751, type: 2}
+  - variantName: Can_Pepsi
+    lableMaterial: {fileID: 2100000, guid: aa5274599953053418be1bf93934b78e, type: 2}
+    capMaterial: {fileID: 2100000, guid: d5dd2fe9b01921a4db6bdf2621473751, type: 2}
+  - variantName: Can_CocaCola
+    lableMaterial: {fileID: 2100000, guid: fe72449cf85c7a041afafc208accd0d4, type: 2}
+    capMaterial: {fileID: 2100000, guid: d5dd2fe9b01921a4db6bdf2621473751, type: 2}
 --- !u!1 &2090845932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,3 +2723,4 @@ SceneRoots:
   - {fileID: 1033611734}
   - {fileID: 1581461930}
   - {fileID: 2090845935}
+  - {fileID: 817992672}

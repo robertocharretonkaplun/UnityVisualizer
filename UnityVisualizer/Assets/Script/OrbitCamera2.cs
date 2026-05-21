@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class OrbitCamera : MonoBehaviour
+public class OrbitCamera2 : MonoBehaviour
 {
     [Header("Target")]
     public Transform target;
