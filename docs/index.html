@@ -168,7 +168,7 @@ Runtime Controls</h1>
 Architecture</h1>
 <p>The scene is built around four decoupled runtime systems:</p>
 <ul>
-<li><b><a class="el" href="classOrbitCamera.html" title="Spherical-coordinate camera that orbits around a target Transform.">OrbitCamera</a></b> — drives the camera; controlled by <a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a> and mouse input.</li>
+<li><b><a class="el" href="classOrbitCamera.html">OrbitCamera</a></b> — drives the camera; controlled by <a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a> and mouse input.</li>
 <li><b><a class="el" href="classCanMaterialSwapper.html" title="Cycles through brand variants by replacing the full material array on the can renderer.">CanMaterialSwapper</a></b> — owns brand variants; notifies <a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a> via <code>OnVariantChanged</code>.</li>
 <li><b><a class="el" href="classBackgroundController.html" title="Cycles through BackgroundPreset entries by writing to MaterialPropertyBlocks.">BackgroundController</a></b> — owns background presets; notifies <a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a> via <code>OnPresetChanged</code>.</li>
 <li><b><a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a></b> — subscriber only; never polls, always reacts to events.</li>

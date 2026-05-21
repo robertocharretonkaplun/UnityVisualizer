@@ -92,20 +92,18 @@ $(document).ready(function(){initNavTree('classOrbitCamera.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="classOrbitCamera-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">OrbitCamera Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Spherical-coordinate camera that orbits around a target Transform.  
- <a href="classOrbitCamera.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for OrbitCamera:</div>
 <div class="dyncontent">
 <div class="center"><img src="classOrbitCamera__inherit__graph.png" border="0" usemap="#aOrbitCamera_inherit__map" alt="Inheritance graph"/></div>
 <map name="aOrbitCamera_inherit__map" id="aOrbitCamera_inherit__map">
-<area shape="rect" title="Spherical&#45;coordinate camera that orbits around a target Transform." alt="" coords="15,79,120,104"/>
+<area shape="rect" title=" " alt="" coords="15,79,120,104"/>
 <area shape="rect" title=" " alt="" coords="5,5,129,31"/>
 <area shape="poly" title=" " alt="" coords="70,44,70,79,65,79,65,44"/>
 </map>
@@ -115,7 +113,7 @@ Collaboration diagram for OrbitCamera:</div>
 <div class="dyncontent">
 <div class="center"><img src="classOrbitCamera__coll__graph.png" border="0" usemap="#aOrbitCamera_coll__map" alt="Collaboration graph"/></div>
 <map name="aOrbitCamera_coll__map" id="aOrbitCamera_coll__map">
-<area shape="rect" title="Spherical&#45;coordinate camera that orbits around a target Transform." alt="" coords="15,79,120,104"/>
+<area shape="rect" title=" " alt="" coords="15,79,120,104"/>
 <area shape="rect" title=" " alt="" coords="5,5,129,31"/>
 <area shape="poly" title=" " alt="" coords="70,44,70,79,65,79,65,44"/>
 </map>
@@ -124,71 +122,41 @@ Collaboration diagram for OrbitCamera:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abc14d5be7dd11171e65d16b0fa1dfb31" id="r_abc14d5be7dd11171e65d16b0fa1dfb31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#abc14d5be7dd11171e65d16b0fa1dfb31">ToggleAutoRotate</a> ()</td></tr>
-<tr class="memdesc:abc14d5be7dd11171e65d16b0fa1dfb31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flips the auto-rotation state.  <br /></td></tr>
 <tr class="separator:abc14d5be7dd11171e65d16b0fa1dfb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62d55cd421d2a885d67d9ed542d70691" id="r_a62d55cd421d2a885d67d9ed542d70691"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a62d55cd421d2a885d67d9ed542d70691">ResetView</a> ()</td></tr>
-<tr class="memdesc:a62d55cd421d2a885d67d9ed542d70691"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets yaw, pitch and distance to their default showcase values.  <br /></td></tr>
 <tr class="separator:a62d55cd421d2a885d67d9ed542d70691"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">Target</div></td></tr>
 <tr class="memitem:af65ae929a8138327191e074922911bd9" id="r_af65ae929a8138327191e074922911bd9"><td class="memItemLeft" align="right" valign="top">Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#af65ae929a8138327191e074922911bd9">target</a></td></tr>
-<tr class="memdesc:af65ae929a8138327191e074922911bd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The point the camera orbits around.  <br /></td></tr>
 <tr class="separator:af65ae929a8138327191e074922911bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4204bf7a5426ab3cfa677a4f6e470f46" id="r_a4204bf7a5426ab3cfa677a4f6e470f46"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a4204bf7a5426ab3cfa677a4f6e470f46">distance</a> = 3f</td></tr>
-<tr class="memdesc:a4204bf7a5426ab3cfa677a4f6e470f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current distance from target in world units.  <br /></td></tr>
 <tr class="separator:a4204bf7a5426ab3cfa677a4f6e470f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Auto Rotation</div></td></tr>
 <tr class="memitem:a4fb06c8a940c0a0c8135407997edbd08" id="r_a4fb06c8a940c0a0c8135407997edbd08"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a4fb06c8a940c0a0c8135407997edbd08">autoRotateSpeed</a> = 20f</td></tr>
-<tr class="memdesc:a4fb06c8a940c0a0c8135407997edbd08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Degrees per second of automatic yaw rotation.  <br /></td></tr>
 <tr class="separator:a4fb06c8a940c0a0c8135407997edbd08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea2568f5ad27e039b7b1392ba984057" id="r_aeea2568f5ad27e039b7b1392ba984057"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#aeea2568f5ad27e039b7b1392ba984057">autoRotate</a> = true</td></tr>
-<tr class="memdesc:aeea2568f5ad27e039b7b1392ba984057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the camera is currently auto-rotating.  <br /></td></tr>
 <tr class="separator:aeea2568f5ad27e039b7b1392ba984057"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Manual Orbit</div></td></tr>
 <tr class="memitem:ac10a81dfa45c98082ed0941e77113a30" id="r_ac10a81dfa45c98082ed0941e77113a30"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#ac10a81dfa45c98082ed0941e77113a30">mouseSensitivity</a> = 200f</td></tr>
-<tr class="memdesc:ac10a81dfa45c98082ed0941e77113a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse sensitivity in degrees per pixel-second.  <br /></td></tr>
 <tr class="separator:ac10a81dfa45c98082ed0941e77113a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a211309c1e8e6105dfdc54857e392a794" id="r_a211309c1e8e6105dfdc54857e392a794"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a211309c1e8e6105dfdc54857e392a794">minVerticalAngle</a> = -20f</td></tr>
-<tr class="memdesc:a211309c1e8e6105dfdc54857e392a794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum pitch (vertical) angle in degrees.  <br /></td></tr>
 <tr class="separator:a211309c1e8e6105dfdc54857e392a794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70bf4cf9bf7ae4f45d58ccbc647a1885" id="r_a70bf4cf9bf7ae4f45d58ccbc647a1885"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a70bf4cf9bf7ae4f45d58ccbc647a1885">maxVerticalAngle</a> = 70f</td></tr>
-<tr class="memdesc:a70bf4cf9bf7ae4f45d58ccbc647a1885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum pitch (vertical) angle in degrees.  <br /></td></tr>
 <tr class="separator:a70bf4cf9bf7ae4f45d58ccbc647a1885"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Zoom</div></td></tr>
 <tr class="memitem:a953c90c7e02bf6b50068f06893525768" id="r_a953c90c7e02bf6b50068f06893525768"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a953c90c7e02bf6b50068f06893525768">scrollSensitivity</a> = 5f</td></tr>
-<tr class="memdesc:a953c90c7e02bf6b50068f06893525768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll-wheel zoom sensitivity (world units per scroll unit).  <br /></td></tr>
 <tr class="separator:a953c90c7e02bf6b50068f06893525768"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec634bb908c9edba21d4cc57aa852ea8" id="r_aec634bb908c9edba21d4cc57aa852ea8"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#aec634bb908c9edba21d4cc57aa852ea8">minDistance</a> = 1.5f</td></tr>
-<tr class="memdesc:aec634bb908c9edba21d4cc57aa852ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closest allowed distance to the target.  <br /></td></tr>
 <tr class="separator:aec634bb908c9edba21d4cc57aa852ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf2f7285895dbfac45a2e38abdda44c6" id="r_adf2f7285895dbfac45a2e38abdda44c6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#adf2f7285895dbfac45a2e38abdda44c6">maxDistance</a> = 8f</td></tr>
-<tr class="memdesc:adf2f7285895dbfac45a2e38abdda44c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Farthest allowed distance from the target.  <br /></td></tr>
 <tr class="separator:adf2f7285895dbfac45a2e38abdda44c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a40e617c292b507ac9c1662c8198a26e1" id="r_a40e617c292b507ac9c1662c8198a26e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOrbitCamera.html#a40e617c292b507ac9c1662c8198a26e1">IsAutoRotating</a><code> [get]</code></td></tr>
-<tr class="memdesc:a40e617c292b507ac9c1662c8198a26e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <code>true</code> when auto-rotation is active.  <br /></td></tr>
 <tr class="separator:a40e617c292b507ac9c1662c8198a26e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Spherical-coordinate camera that orbits around a target Transform. </p>
-<p>Supports three interaction modes:</p><ul>
-<li><b>Auto-rotation</b>: constant yaw increment each frame (idle showcase).</li>
-<li><b>Mouse drag</b>: left-button drag overrides auto-rotation while held.</li>
-<li><b>Scroll zoom</b>: mouse wheel adjusts the orbital radius.</li>
-</ul>
-<p>Attach to the Main Camera. Assign <a class="el" href="classOrbitCamera.html#af65ae929a8138327191e074922911bd9">target</a> in the Inspector or via ProductVisualizerSetup, which creates a dedicated <em>Camera Target</em> object at the product's centre of mass.</p>
-<dl class="section user"><dt>Usage example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Toggle auto-rotation from UI</span></div>
-<div class="line">GetComponent&lt;OrbitCamera&gt;().ToggleAutoRotate();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Reset to default framing</span></div>
-<div class="line">GetComponent&lt;OrbitCamera&gt;().ResetView();</div>
-</div><!-- fragment --> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00028">28</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00003">3</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a62d55cd421d2a885d67d9ed542d70691" name="a62d55cd421d2a885d67d9ed542d70691"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a62d55cd421d2a885d67d9ed542d70691">&#9670;&#160;</a></span>ResetView()</h2>
@@ -205,11 +173,9 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Resets yaw, pitch and distance to their default showcase values. </p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00097">97</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00170">170</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
-
-<p class="reference">References <a class="el" href="OrbitCamera_8cs_source.html#l00044">distance</a>.</p>
+<p class="reference">References <a class="el" href="OrbitCamera_8cs_source.html#l00009">distance</a>.</p>
 
 </div>
 </div>
@@ -228,9 +194,6 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Flips the auto-rotation state. </p>
-<p>Called by <a class="el" href="classVisualizerUI.html" title="Connects Unity UI buttons and TextMeshPro labels to the three scene controllers.">VisualizerUI</a> when the user presses the Auto-Rotate button. </p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -246,10 +209,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Whether the camera is currently auto-rotating. </p>
-<p>Set to <code>false</code> while the user drags; restored on mouse-up. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00056">56</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00011">11</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -265,9 +225,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Degrees per second of automatic yaw rotation. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00052">52</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00010">10</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -283,12 +241,9 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Current distance from target in world units. </p>
-<p>Clamped at runtime between <a class="el" href="classOrbitCamera.html#aec634bb908c9edba21d4cc57aa852ea8">minDistance</a> and <a class="el" href="classOrbitCamera.html#adf2f7285895dbfac45a2e38abdda44c6">maxDistance</a>. </p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00009">9</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00044">44</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="OrbitCamera_8cs_source.html#l00170">ResetView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="OrbitCamera_8cs_source.html#l00097">ResetView()</a>.</p>
 
 </div>
 </div>
@@ -304,9 +259,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Farthest allowed distance from the target. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00084">84</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00021">21</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -322,9 +275,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Maximum pitch (vertical) angle in degrees. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00070">70</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00016">16</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -340,9 +291,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Closest allowed distance to the target. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00081">81</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00020">20</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -358,9 +307,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Minimum pitch (vertical) angle in degrees. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00067">67</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00015">15</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -376,9 +323,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mouse sensitivity in degrees per pixel-second. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00064">64</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00014">14</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -394,9 +339,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Scroll-wheel zoom sensitivity (world units per scroll unit). </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00078">78</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00019">19</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -412,10 +355,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The point the camera orbits around. </p>
-<p>Typically the geometric centre of the displayed product. Created automatically by ProductVisualizerSetup. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00040">40</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00006">6</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
@@ -440,9 +380,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns <code>true</code> when auto-rotation is active. </p>
-
-<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00167">167</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="OrbitCamera_8cs_source.html#l00095">95</a> of file <a class="el" href="OrbitCamera_8cs_source.html">OrbitCamera.cs</a>.</p>
 
 </div>
 </div>
